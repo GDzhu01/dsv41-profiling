@@ -2,7 +2,21 @@
 
 原始 profiling 和解析报告存放在 GitHub Releases。仓库为公开仓库。
 
-## 最新：PR11 dSpark + skip-allreduce，D0/DP0 running=50，v2
+## 最新：Engram overlap，384 并发，D0/DP0 running=12（2026-10-06）
+
+[打开 Release](https://github.com/GDzhu01/dsv41-profiling/releases/tag/engram-overlap-c384-dp0-running12-20261006)
+
+- [原始 profiling](https://github.com/GDzhu01/dsv41-profiling/releases/download/engram-overlap-c384-dp0-running12-20261006/engram-overlap-c384-dp0-running12-20261006-raw.tar.gz)
+- [解析报告 HTML / XLSX / Markdown、每 DP 性能数据及采集证据](https://github.com/GDzhu01/dsv41-profiling/releases/download/engram-overlap-c384-dp0-running12-20261006/engram-overlap-c384-dp0-running12-20261006-analysis.tar.gz)
+- [SHA256SUMS](https://github.com/GDzhu01/dsv41-profiling/releases/download/engram-overlap-c384-dp0-running12-20261006/SHA256SUMS)
+
+384 并发、384 请求全部成功；输出 4096 tokens，repeat_rate=100%，P 全部 DP 已预热。Engram overlap 开启，DSpark 入图，Static / Super Kernel 关闭。
+
+DP0 running=12、waiting=0 时采集 **2.003 秒**，窗口内 19 次采样均保持此并发。解析出 **171,719 个设备事件、88 个完整 step**，step P50 **23.131 ms**、P90 **23.165 ms**。
+
+本轮 TPOT **6.1 ms**，整体输出吞吐 **49,981.41 tokens/s**，D 各 DP 打屏峰值 **2161.6–2168.3 tokens/s**。本轮包含 profiling 开销。解压分析包后打开 `analysis/report/report.html`。
+
+## 历史：PR11 dSpark + skip-allreduce，D0/DP0 running=50，v2
 
 [打开 v2 Release](https://github.com/GDzhu01/dsv41-profiling/releases/tag/pr11-dspark-skipallreduce-dp0-running50-v2-20261005)
 
